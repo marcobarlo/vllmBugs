@@ -1,1 +1,1273 @@
-{}
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-24",
+  "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries marked last_known_* were not all revalidated on this date.",
+  "bugs": [
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 48966,
+      "title": "EngineCore death exits status 0",
+      "failure_class": "lifecycle/recovery",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/48966"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 52871,
+      "title": "Forward-pass OOM kills shared EngineCore",
+      "failure_class": "fault containment",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/52871"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 52247,
+      "title": "GPU kernel hang leaves falsely healthy server",
+      "failure_class": "liveness/failure detection",
+      "status": "last_known_open",
+      "root_cause": "Original FlashInfer trigger fixed; generic unbounded wait remained.",
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/52247"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53505,
+      "title": "KV connector corrupts hybrid-Mamba speculative decoding",
+      "failure_class": "state consistency",
+      "status": "last_known_closed",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53505"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53573,
+      "title": "PCP/DCP ranks divergent KV-gather schedules",
+      "failure_class": "collective consistency/deadlock",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53573"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 52693,
+      "title": "Zero-token continuation crashes EngineCore",
+      "failure_class": "scheduler state/containment",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/52693"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53859,
+      "title": "KV-event telemetry backpressure deadlocks inference",
+      "failure_class": "observability isolation/liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        53883
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53859"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53480,
+      "title": "Persistent token-0 corruption on XPU",
+      "failure_class": "silent inference corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53480"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54002,
+      "title": "Crash leaves /dev/shm preventing recovery",
+      "failure_class": "residual state",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54002"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54193,
+      "title": "Offload watermark publishes unwritten KV",
+      "failure_class": "cross-request corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        54288
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54193"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54195,
+      "title": "OOV stop token crashes engine",
+      "failure_class": "input validation/fault escape",
+      "status": "last_known_closed",
+      "root_cause": null,
+      "fix_prs": [
+        54196
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54195"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54189,
+      "title": "Uninitialized NVFP4 scale silently zeroes MoE experts",
+      "failure_class": "numerical corruption",
+      "status": "last_known_closed",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54189"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54035,
+      "title": "FP8 KV decode/prefill logprob divergence",
+      "failure_class": "numerical consistency",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54035"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53975,
+      "title": "guided_json loses structural guarantee",
+      "failure_class": "API semantics",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53975"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54003,
+      "title": "Structured-output compilation unbounded",
+      "failure_class": "resource isolation/liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54003"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53960,
+      "title": "CPU-offload config hangs during warmup",
+      "failure_class": "startup liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53960"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54125,
+      "title": "Capability predicate selects hard-faulting kernel",
+      "failure_class": "hardware capability negotiation",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54125"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 52234,
+      "title": "NIXL receive failure can return corrupted tokens HTTP 200",
+      "failure_class": "disaggregated state transfer",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/52234"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 53130,
+      "title": "Scheduler stops admission while healthy",
+      "failure_class": "liveness/accounting",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/53130"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 50792,
+      "title": "prompt_logprobs crashes P/D decode",
+      "failure_class": "interface composition",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/50792"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 51420,
+      "title": "Zero-token prompt logprobs abort Rust frontend",
+      "failure_class": "process containment",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/51420"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54300,
+      "title": "Sparse-MLA metadata breaks DCP",
+      "failure_class": "feature composition/startup crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54300"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54698,
+      "title": "XPU graph replay spins forever",
+      "failure_class": "accelerator liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54698"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54764,
+      "title": "Mixed-length PLE batching transient activation OOM",
+      "failure_class": "capacity model violation",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54764"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54877,
+      "title": "Padded KV-page stride mismatch crashes TP workers",
+      "failure_class": "layout correctness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54877"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54866,
+      "title": "DP MoE engine stalls in Triton warmup",
+      "failure_class": "startup liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54866"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54808,
+      "title": "Qwen tool parser ignores required/named tool_choice",
+      "failure_class": "API semantic failure",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54808"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54690,
+      "title": "FP8 speculative KV crashes hybrid startup",
+      "failure_class": "backend capability composition",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        54731
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54690"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54710,
+      "title": "Pipeline ranks incorrectly require identical KV layouts",
+      "failure_class": "distributed capability negotiation",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        54795
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54710"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54726,
+      "title": "Qwen3.8-Flash-Next + MooncakeStoreConnector startup failure",
+      "failure_class": "connector composition",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55027
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54726"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54914,
+      "title": "OffloadingConnector loses KV block after days uptime",
+      "failure_class": "cache lifecycle/engine crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54914"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55279,
+      "title": "DFlash2 cumulative OOB kills engine",
+      "failure_class": "accelerator memory safety",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55279"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55208,
+      "title": "Heterogeneous TP corrupts Mamba2 conv state",
+      "failure_class": "silent distributed-state corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55306
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55208"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55087,
+      "title": "GLM-5.3 KDA stale merged weights after refit",
+      "failure_class": "silent model-state corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55224
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55087"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55284,
+      "title": "Responses API stream aborts mid-tool-call",
+      "failure_class": "streaming protocol/broken output",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55371
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55284"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55221,
+      "title": "FP8 sparse-MLA startup rejects valid storage dtype",
+      "failure_class": "backend composition/startup",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55222
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55221"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 49310,
+      "title": "Hidden-state connector full-gathers long contexts and OOMs engine",
+      "failure_class": "memory isolation",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/49310"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55000,
+      "title": "DP8 P2P tier hangs creating secondary NIXL/UCX agents",
+      "failure_class": "startup liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55000"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55280,
+      "title": "ROCm kpool page split GPU memory-access fault",
+      "failure_class": "KV-layout/device crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55280"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55312,
+      "title": "Draft/target select incompatible KV layouts",
+      "failure_class": "capability negotiation/startup",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55340
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55312"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55313,
+      "title": "DSpark/XGrammar desync malformed JSON HTTP 200",
+      "failure_class": "semantic corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55313"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55295,
+      "title": "browser.find Responses action fails SDK validation",
+      "failure_class": "API contract failure",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55305
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55295"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55503,
+      "title": "MTP speculation crosses KV-offload commit frontier",
+      "failure_class": "state-frontier consistency/engine crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55503"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55486,
+      "title": "DeepSeek V4 V2 runner emits only BOS tokens",
+      "failure_class": "silent model-execution corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55486"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55510,
+      "title": "SIGKILLed API server leaves GPU workers orphaned",
+      "failure_class": "process lifecycle/recovery",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55510"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55495,
+      "title": "Malformed tool-call output poisons conversation",
+      "failure_class": "API semantic/session corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55497
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55495"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55452,
+      "title": "ROCm graph capture fails above 64 seqs",
+      "failure_class": "startup availability/resource lifecycle",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55452"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 54260,
+      "title": "PP+async+spec decode desynchronizes ranks",
+      "failure_class": "distributed-state divergence/NCCL deadlock",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        54270
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/54260"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55600,
+      "title": "Hybrid-Mamba prefix-cache index wrong block-size units",
+      "failure_class": "cross-request state corruption/memory safety",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55601
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55600"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55649,
+      "title": "NVFP4 gated-MoE padding shifts gate/up layout",
+      "failure_class": "silent numerical corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55649"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55636,
+      "title": "Sparse-MLA warmup indexes nonexistent block-table row",
+      "failure_class": "KV metadata bounds/crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55636"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55632,
+      "title": "ROCm shutdown timers force-kill before cleanup",
+      "failure_class": "recovery/resource lifecycle",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55646
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55632"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 49250,
+      "title": "KV-load recompute preserves stale GPU progress",
+      "failure_class": "rollback consistency/silent corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        49252,
+        53298
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/49250"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55729,
+      "title": "Mooncake bootstrap timeout becomes infinite readiness wait",
+      "failure_class": "startup liveness/failure propagation",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55763
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55729"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55725,
+      "title": "GLM-5.3 shared-weight aliasing crashes TP>8 loading",
+      "failure_class": "distributed model-state mapping/startup crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        55753
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55725"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55951,
+      "title": "PP>1+spec decode Mamba stale batch mapping copies recurrent state to wrong blocks",
+      "failure_class": "cross-request recurrent-state corruption",
+      "status": "open",
+      "root_cause": "Stale batch mapping can target the wrong recurrent-state blocks.",
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55951"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55904,
+      "title": "Persistent KV offload cache not namespaced by KV layout",
+      "failure_class": "persistent cross-process corruption",
+      "status": "open",
+      "root_cause": "Persistent cache identity omits KV layout.",
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55904"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55927,
+      "title": "DeepSeek-V4 deep-context exact retrieval periodic wrong token",
+      "failure_class": "silent sparse-attention correctness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55927"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55894,
+      "title": "Hybrid Mamba + MTP drafter backend corrupts decode scheduling",
+      "failure_class": "scheduler/backend state corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55894"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55870,
+      "title": "Mooncake bootstrap/KV failure leaves PD requests waiting",
+      "failure_class": "distributed failure propagation/liveness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55870"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55827,
+      "title": "Concurrent startup misattributes peer allocations",
+      "failure_class": "startup capacity accounting/availability",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55827"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 55800,
+      "title": "DFlash2 sliding-window drafter scales KV requirement with full sequence",
+      "failure_class": "admission deadlock/execution crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/55800"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 56785,
+      "title": "GLM-5.3-Flash/GB200 invalid CUDA event after graph capture",
+      "failure_class": "startup failure",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/56785"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 56949,
+      "title": "DP reconfiguration/live weight transfer loses replica identity",
+      "failure_class": "distributed state transfer",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/56949"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57059,
+      "title": "ROCm custom all-reduce memory-ordering failure",
+      "failure_class": "collective correctness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57059"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57503,
+      "title": "XPU LoRA initialization after W4A8 repacking prevents startup",
+      "failure_class": "startup availability",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57503"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57493,
+      "title": "ROCm gfx1151 greedy output changes after unrelated filler traffic",
+      "failure_class": "nondeterministic/silent correctness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57493"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57490,
+      "title": "Streamed tool-call marker split across chunks is lost",
+      "failure_class": "streaming structured-output failure",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57490"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57486,
+      "title": "SM12x FP8 incompatible DeepGEMM mode causes NaNs/failure",
+      "failure_class": "numerical/startup correctness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57486"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57475,
+      "title": "CUDA graph memory estimation under-reserves",
+      "failure_class": "startup OOM",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57475"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57449,
+      "title": "MLA workspace OOM kills EngineCore during GLM-5.3 prefill",
+      "failure_class": "memory isolation/engine crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57449"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57440,
+      "title": "Weight-loading/repacking memory not reclaimed",
+      "failure_class": "startup memory lifecycle",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57440"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57429,
+      "title": "ROCm gfx942 inference hangs near fused-MoE",
+      "failure_class": "accelerator liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57429"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57424,
+      "title": "Missing ROCm forward path prevents GLM-5.3-Flash boot",
+      "failure_class": "startup availability",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57424"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57423,
+      "title": "FlashInfer autotune-cache hit on one rank can deadlock multi-rank launch",
+      "failure_class": "cross-rank control divergence/deadlock",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57423"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57354,
+      "title": "DeepSeek-V4 sparse-MLA warmup intermittently segfaults",
+      "failure_class": "startup crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57354"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57303,
+      "title": "Non-graceful shutdown leaks offload shared-memory mappings",
+      "failure_class": "recovery/resource lifecycle",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57303"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57267,
+      "title": "Hybrid Mamba2 prefix caching produces batch-dependent outputs",
+      "failure_class": "silent state corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57267"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 57266,
+      "title": "Hybrid Mamba2 prefix caching block sizing out-of-range kills EngineCore",
+      "failure_class": "KV metadata bounds/engine crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm/issues/57266"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 14106,
+      "title": "MemCache failure desync TP ranks",
+      "failure_class": "distributed control divergence",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/14106"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 12383,
+      "title": "PD transport failure leaves KV permanently saturated",
+      "failure_class": "state lifecycle/liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/12383"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15060,
+      "title": "Mooncake KV key misses permanently fail requests",
+      "failure_class": "state visibility",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15060"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15697,
+      "title": "Profiler stop segfaults EngineCore",
+      "failure_class": "diagnostic fault containment",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15697"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15712,
+      "title": "SFA indexer wrong quantized path",
+      "failure_class": "decode crash",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        15713
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15712"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 7707,
+      "title": "Mooncake break yields garbled decode under concurrency",
+      "failure_class": "distributed-state corruption",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/7707"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15903,
+      "title": "MoE TopK vector-core exception crashes all 16 ranks",
+      "failure_class": "accelerator/rank-group failure",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15903"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15892,
+      "title": "DeepSeek-V4 decode node dies on vector-core timeout",
+      "failure_class": "accelerator liveness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15892"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15906,
+      "title": "GLM-5.3 W8A8C8 crashes when load begins",
+      "failure_class": "load-triggered availability",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15906"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16085,
+      "title": "GLM5.3 DCP8 + SFA-C8 deterministic garbled output",
+      "failure_class": "distributed attention correctness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16085"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16079,
+      "title": "Kimi-K2.7-Code crashes under performance load",
+      "failure_class": "load-triggered availability",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16079"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16072,
+      "title": "GLM-5.3-Flash 1M inference vector-core crash",
+      "failure_class": "long-context accelerator crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16072"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16061,
+      "title": "DeepSeek-V4-Pro thinking loop ignores max_tokens",
+      "failure_class": "termination/bounded execution failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16061"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16023,
+      "title": "Kimi-K3 ~100K input crashes prefill tier",
+      "failure_class": "long-context P/D engine crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16023"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16022,
+      "title": "Qwen3.6 VRAM not released, eventually crashes",
+      "failure_class": "memory lifecycle",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16022"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16015,
+      "title": "GLM5.3 P/D long input returns garbled output",
+      "failure_class": "long-context distributed-attention corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16015"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16001,
+      "title": "Qwen3.8 tool args malformed JSON",
+      "failure_class": "API structured-output corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16001"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15990,
+      "title": "FreeKVCacheBlockQueue race causes negative block counts",
+      "failure_class": "KV allocator race",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [
+        52707
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15990"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15984,
+      "title": "GLM-5.3 context ceiling hangs service",
+      "failure_class": "hybrid-state capacity/liveness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15984"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 15930,
+      "title": "DeepSeek-V4-Pro PD+DSpark position OOB then MoE timeout",
+      "failure_class": "speculative position-state/accelerator crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/15930"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16484,
+      "title": "GLM-5.2 DSpark graph freezes reduction decision",
+      "failure_class": "graph/distributed-state correctness",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [
+        16482
+      ],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16484"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16577,
+      "title": "Profiling stop can segfault workers and starve shared memory",
+      "failure_class": "observability fault containment",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16577"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16662,
+      "title": "Cancellation during async KV load can leak KV blocks",
+      "failure_class": "cancellation/state lifecycle",
+      "status": "last_known_open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16662"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16870,
+      "title": "DeepSeek-V4.1-Flash gibberish on A3 dual-node deployment",
+      "failure_class": "silent output corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16870"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16828,
+      "title": "Engram host offload invalid-GM crash under concurrency",
+      "failure_class": "host-offload memory safety/engine crash",
+      "status": "open",
+      "root_cause": "Observed with tested offload path; no-offload control stable.",
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16828"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16799,
+      "title": "SFA MTP draft crashes on uneven DP batches",
+      "failure_class": "distributed batch-shape mismatch/crash",
+      "status": "open",
+      "root_cause": "Padded execution row count disagrees with attention metadata.",
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16799"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16773,
+      "title": "Kimi-K3 inference segfault in Ascend runtime event destroy",
+      "failure_class": "process crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16773"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16763,
+      "title": "GLM-5.3 W8A8C8 intermittently crashes after runtime",
+      "failure_class": "intermittent service crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16763"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16760,
+      "title": "Profiling + vision request can fatal EngineCore",
+      "failure_class": "observability fault containment",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16760"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16754,
+      "title": "GLM-5.3 startup hangs in KV-cache profiling",
+      "failure_class": "startup collective deadlock",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16754"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16746,
+      "title": "GLM-5.3-Flash repetitive generation loop",
+      "failure_class": "broken output/termination failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16746"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 16736,
+      "title": "GLM-5.3-Flash W8A8 decode graph capture prevents startup",
+      "failure_class": "startup graph-capture failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-24",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/16736"
+    }
+  ]
+}
