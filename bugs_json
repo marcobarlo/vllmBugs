@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-24",
+  "updated_at": "2026-09-25",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries marked last_known_* were not all revalidated on this date.",
   "bugs": [
     {
@@ -1268,6 +1268,186 @@
       "fix_prs": [],
       "last_checked": "2026-09-24",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/16736"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58675,
+      "title": "hf-overrides can silently drop rope_theta under Transformers v5",
+      "failure_class": "silent model-configuration corruption",
+      "status": "open",
+      "root_cause": "Transformers v5 override handling can drop rope_theta, causing fallback to base 10000 for models without a per-file default.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58675"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58640,
+      "title": "DeepSeek V4.1 parser suppresses streamed tool-call arguments",
+      "failure_class": "streaming structured-output failure",
+      "status": "open",
+      "root_cause": "V4 parser tag/regex assumptions do not accept V4.1 DSML leading spaces; delta filtering then suppresses argument streaming.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58640"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58636,
+      "title": "GLM-5.x sparse indexer can diverge across TP ranks",
+      "failure_class": "cross-rank numerical divergence/silent correctness",
+      "status": "open",
+      "root_cause": "Per-rank autotuning can choose different reduction orders for replicated key normalization, changing sparse top-k candidates near ties.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58636"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58627,
+      "title": "DeepSelect NaN path leaves stale sparse top-k entries",
+      "failure_class": "silent sparse-attention state corruption",
+      "status": "open",
+      "root_cause": "On NaN, DeepSelect writes only the first sentinel slot; reused scratch retains stale indices that are remapped as valid attention positions.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58627"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58616,
+      "title": "vllm serve segfaults during profile run after weight loading on L4",
+      "failure_class": "startup process crash",
+      "status": "open",
+      "root_cause": "Deterministic post-load segfault is timing-sensitive and disappears with function tracing, suggesting a race in startup/profile execution.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58616"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58596,
+      "title": "Debug MFU metrics kill server on first request",
+      "failure_class": "observability fault containment/process availability",
+      "status": "open",
+      "root_cause": "Debug context contains a list but the serialized schema expects dict[str,int], causing frontend msgpack validation failure and output-handler death.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58596"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58575,
+      "title": "v0.30.0 ROCm release cannot start GLM-5.3",
+      "failure_class": "release regression/startup availability",
+      "status": "open",
+      "root_cause": "Published ROCm v0.30.0 image is missing an upstream fix required by GlmMoeDsa startup on AMD.",
+      "fix_prs": [
+        57252
+      ],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58575"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58565,
+      "title": "First CPU embeddings request crashes EngineCore worker",
+      "failure_class": "request-triggered engine crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58565"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58543,
+      "title": "Mooncake decode bootstrap timeout can fatally fail first PD request",
+      "failure_class": "cold-start failure propagation/disaggregated liveness",
+      "status": "open",
+      "root_cause": "Decode-side bootstrap query inherits httpx's 5s default timeout and has no retry/configuration path.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58543"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58532,
+      "title": "Triton fused MoE misindexes per-channel weight scales",
+      "failure_class": "silent quantized-MoE numerical corruption",
+      "status": "open",
+      "root_cause": "Kernel uses the activation quantization flag to choose both activation- and weight-scale indexing, reading per-channel weight scales with the wrong layout.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58532"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58485,
+      "title": "Thinking-budget truncation corrupts multi-token reasoning terminator under speculative decoding",
+      "failure_class": "speculative-decoding structured-output corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58485"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58479,
+      "title": "Elastic expert-parallel scale-up crashes with EAGLE3 and CUDA graphs",
+      "failure_class": "elastic reconfiguration/engine crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm/issues/58479"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17520,
+      "title": "DFlash speculative verification can produce wrong attention outputs",
+      "failure_class": "speculative-attention correctness",
+      "status": "open",
+      "root_cause": "Folded verification queries can share an incorrect causal KV length in fused infer attention; grouping also changes reduction paths and BF16 results.",
+      "fix_prs": [
+        17519
+      ],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17520"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17518,
+      "title": "npu_gather_pa_kv_cache hangs or kills engine on large/non-contiguous KV gathers",
+      "failure_class": "KV gather accelerator hang/engine crash",
+      "status": "open",
+      "root_cause": "CANN gather operator fails when touching >=12 KV blocks and separately on certain non-contiguous interleaved KV-pool strides.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17518"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17476,
+      "title": "DeepSeek V4 Flash BF16 conversion loses accuracy when quant descriptor is present",
+      "failure_class": "silent expert-routing/model-state corruption",
+      "status": "open",
+      "root_cause": "Presence of quant_model_description.json forces ModelSlim config; FLOAT skip path drops tid2eid for sqrtsoftplus hash-MoE routing, selecting the wrong experts.",
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17476"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17438,
+      "title": "GLM-5.2 W8A8 PD decode with DCP produces garbled/repeated output",
+      "failure_class": "disaggregated sparse-attention correctness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-25",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17438"
     }
   ]
 }
