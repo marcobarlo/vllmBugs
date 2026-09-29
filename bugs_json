@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-25",
+  "updated_at": "2026-09-29",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries marked last_known_* were not all revalidated on this date.",
   "bugs": [
     {
@@ -1448,6 +1448,450 @@
       "fix_prs": [],
       "last_checked": "2026-09-25",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/17438"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58824,
+      "title": "Llama3 JSON streaming can silently drop ordinary assistant content beginning with '{'",
+      "failure_class": "streaming/API semantic data loss",
+      "status": "open",
+      "root_cause": "Streaming parser classifies from the first character and does not fall back from tool-call parsing.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58824"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58825,
+      "title": "HarmonyParser can turn stray assistant commentary header into a bogus tool call",
+      "failure_class": "tool-call semantic corruption",
+      "status": "open",
+      "root_cause": "A stray Harmony channel header is parsed as a tool invocation with an invalid tool name.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58825"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58850,
+      "title": "Intermittent Xid 31 MMU fault in pynccl all-reduce during CUDA graph capture",
+      "failure_class": "collective/GPU memory fault",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58850"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58864,
+      "title": "GLM-5.3 MXFP4 DP8 without EP crashes during FlashInfer autotune",
+      "failure_class": "startup GPU memory fault",
+      "status": "open",
+      "root_cause": "Sparse-MLA logical-to-physical index conversion hits an illegal CUDA memory access during autotune.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58864"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58886,
+      "title": "ROCm AITER MLA FP8 prefill races persistent metadata under async scheduling",
+      "failure_class": "concurrency/memory safety",
+      "status": "open",
+      "root_cause": "Persistent device scheduling metadata can be overwritten while an in-flight prefill kernel still consumes it.",
+      "fix_prs": [
+        58887
+      ],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58886"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58893,
+      "title": "AITER MXFP4 MoE Gluon backend crashes on gfx950 after version bump",
+      "failure_class": "backend compatibility/startup crash",
+      "status": "open",
+      "root_cause": "Auto-selected Gluon path calls a Triton-Gluon AMD API absent from the Triton revision shipped by vLLM.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58893"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58899,
+      "title": "Greedy output changes across restarts due to autotuned fused q/k-norm plus RoPE reduction",
+      "failure_class": "silent nondeterministic correctness",
+      "status": "open",
+      "root_cause": "Runtime timing can select numerically different reduction configurations for the fused kernel.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58899"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58902,
+      "title": "Qwen3-Omni M-RoPE positions are silently misaligned for multimodal requests",
+      "failure_class": "silent multimodal correctness",
+      "status": "open",
+      "root_cause": "Position offset bookkeeping double-counts the modality-start token.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58902"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58910,
+      "title": "DeepSeek-V4.1-Flash long prefill can trigger Xid 31 on SM120",
+      "failure_class": "long-context GPU memory fault/engine crash",
+      "status": "open",
+      "root_cause": "Failure is deterministic with CUDA graphs and intermittent in eager mode during long sparse-MLA prefill.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58910"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58912,
+      "title": "XPU FlashAttention silently drops logits_soft_cap for Gemma models",
+      "failure_class": "silent numerical correctness",
+      "status": "open",
+      "root_cause": "The XPU forwarding path accepts but does not pass the softcap argument, bypassing fallback validation.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58912"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58931,
+      "title": "MooncakeStoreConnector can crash EngineCore after prefix-cache reset preemption",
+      "failure_class": "scheduler/connector state crash",
+      "status": "open",
+      "root_cause": "A preempted request can be re-admitted while connector state from the prior lifecycle is inconsistent.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58931"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58954,
+      "title": "QSA indexer selects unsupported cooperative_topk on SM110",
+      "failure_class": "hardware capability/startup failure",
+      "status": "open",
+      "root_cause": "Capability predicate excludes SM120 but not SM110, selecting a cluster launch mode unsupported on Jetson Thor.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58954"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58960,
+      "title": "QSA key-cache views retain profiling KV storage and OOM CUDA graph capture",
+      "failure_class": "startup memory lifecycle",
+      "status": "closed",
+      "root_cause": "Views keep the profiling KV allocation alive, leaving memory unavailable to the CUDA graph private pool.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58960"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 58973,
+      "title": "Speculative prefill can change Qwen3 first greedy token through RMSNorm autotuning",
+      "failure_class": "silent numerical correctness",
+      "status": "open",
+      "root_cause": "Autotune configuration changes floating-point reduction behavior during speculative prefill.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/58973"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59009,
+      "title": "Rust frontend returns HTTP 500 for legal chat templates using raise_exception",
+      "failure_class": "frontend/API availability",
+      "status": "open",
+      "root_cause": "The Rust template renderer lacks a function supported by legal model chat templates.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59009"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59027,
+      "title": "ROCm v0.30.0 GLM-5.3-Flash cannot boot on gfx942 sparse MLA",
+      "failure_class": "release/startup regression",
+      "status": "open",
+      "root_cause": "The release lacks the sparse-MLA record_logical_topk_ready support present on newer code.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59027"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59045,
+      "title": "DeepSeek-V4.1-Flash ROCm startup loses Engram host offload and OOMs",
+      "failure_class": "startup memory/offload regression",
+      "status": "open",
+      "root_cause": "The AMD path places roughly 47 GiB per rank of Engram state on GPU instead of pinned host memory.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59045"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59057,
+      "title": "Official v0.30.0 cu129 image crashes on import due to Torch/Torchvision CUDA mismatch",
+      "failure_class": "release packaging/startup failure",
+      "status": "open",
+      "root_cause": "The image contains a cu130 Torch build alongside cu129 torchvision, so torchvision operators are unavailable.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59057"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59064,
+      "title": "Kimi-K3 MXFP4 startup selected an unsupported FlashInfer TRT-LLM MoE backend",
+      "failure_class": "backend selection/startup failure",
+      "status": "closed",
+      "root_cause": "Backend selection routed MXFP4/SITU execution to an incompatible BF16 path.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59064"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59065,
+      "title": "FlashInfer MLA with DCP crashes warmup on ragged speculative decode batch",
+      "failure_class": "distributed speculative-decode startup failure",
+      "status": "open",
+      "root_cause": "DCP path receives a global causal-sequence vector with a shape inconsistent with the mixed spec/non-spec batch.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59065"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59078,
+      "title": "Batch-invariant mode breaks DeepEncoder startup through dtype change",
+      "failure_class": "determinism mode/startup crash",
+      "status": "open",
+      "root_cause": "mean_batch_invariant returns fp32 even when aten::mean should preserve bf16, feeding fp32 into a bf16 convolution.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59078"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59086,
+      "title": "Batch-invariant mode is not batch-invariant for AWQ models on SM8x",
+      "failure_class": "silent determinism failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59086"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59087,
+      "title": "Mistral tool parser can boot healthy then return HTTP 500 for every chat request",
+      "failure_class": "false-positive health/config validation",
+      "status": "open",
+      "root_cause": "Tokenizer compatibility is not validated at startup; parser construction later requires a missing tool-call token.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59087"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59090,
+      "title": "Invalid chat role can silently delete a message and return HTTP 200",
+      "failure_class": "silent API data loss",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59090"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59101,
+      "title": "UMA startup memory gate can reject configurations that fit",
+      "failure_class": "startup capacity accounting",
+      "status": "closed",
+      "root_cause": "Host-available memory is compared with a fraction of total device memory, counting vLLM's own multi-process boot footprint against the gate.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59101"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59104,
+      "title": "Fill-in DSpark underallocates KV lookahead and can overwrite another request's target KV",
+      "failure_class": "cross-request KV corruption",
+      "status": "open",
+      "root_cause": "Fill-in drafting uses N+1 query positions while the scheduler reserves only N lookahead slots.",
+      "fix_prs": [
+        59105
+      ],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59104"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59110,
+      "title": "NixlConnector heterogeneous TP can silently misread split K/V KV pages",
+      "failure_class": "distributed KV state corruption",
+      "status": "open",
+      "root_cause": "Byte-wise page splitting assumes head-first layout, but several backends expose separate K and V slots or shuffled page layouts.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59110"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59114,
+      "title": "MoRIIO producer death leaves decode requests hung and KV usage elevated",
+      "failure_class": "distributed failure propagation/KV leak",
+      "status": "open",
+      "root_cause": "Producer failure is not propagated into terminal request cleanup on the decode side.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59114"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59115,
+      "title": "GLM-5.3-Flash long chunked prefill triggers illegal CUDA memory access",
+      "failure_class": "long-context engine crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59115"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59117,
+      "title": "Speculative draft cache-spec fragmentation can collapse hybrid KV capacity",
+      "failure_class": "KV capacity accounting/availability",
+      "status": "open",
+      "root_cause": "A draft-only cache spec fragments unified hybrid KV groups so every request pays blocks across groups it does not semantically need.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59117"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59152,
+      "title": "ROCm MiMo audio request imports CUDA-only attention and kills EngineCore",
+      "failure_class": "request-local fault escape/engine crash",
+      "status": "open",
+      "root_cause": "CUDA-only vllm_flash_attn is imported inside the first audio forward pass instead of using the ROCm-compatible encoder attention path.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm/issues/59152"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17541,
+      "title": "GLM-5.3 A3 P/D can corrupt output under undersized MoE receiver capacity",
+      "failure_class": "silent MoE/long-context correctness",
+      "status": "open",
+      "root_cause": "Short-prompt corruption was traced to mega_moe_max_tokens silently clipping expert routes; an independent ~919K middle-retrieval failure remains unresolved.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17541"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17543,
+      "title": "Qwen3.5 W8A8 MRv2 ACLGraph hits GatherV2 device failure under repeated load",
+      "failure_class": "accelerator/runtime failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17543"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17547,
+      "title": "Grouped-head GDN chunk_fwd_o can emit non-finite data or fatal AICORE faults",
+      "failure_class": "kernel numerical corruption/memory safety",
+      "status": "open",
+      "root_cause": "Large packed-token shapes with Hg != H trigger Inf/NaN output and, depending on allocator layout, invalid-GM-address exceptions.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17547"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17593,
+      "title": "Graph-mode distributed DSA inference can produce garbled output",
+      "failure_class": "graph/distributed correctness",
+      "status": "open",
+      "root_cause": "The same model and topology produce correct output with graph mode disabled.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17593"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17616,
+      "title": "DeepSeek-V4-Flash A2 can produce corrupted greedy output under DSA-CP or without DSpark",
+      "failure_class": "distributed attention/speculative correctness",
+      "status": "open",
+      "root_cause": "Correctness depends on DSA-CP and DSpark configuration despite greedy decoding.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17616"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17621,
+      "title": "Kimi-K2.6 JSON-schema generation can enter repetition loops",
+      "failure_class": "structured-output termination/correctness",
+      "status": "open",
+      "root_cause": "The failure reproduces at concurrency 1 and temperature 0 when json_schema structured output is enabled.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17621"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17642,
+      "title": "DeepSeek V4 default config fails startup on 910B after indexer KV change",
+      "failure_class": "startup dtype/config regression",
+      "status": "open",
+      "root_cause": "ScatterNdUpdate receives int8 updates against bf16 destination state unless indexer KV dtype is overridden.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17642"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17706,
+      "title": "Kimi-K3 inference fails with DCP plus MRv2 and GMM SITU quantization",
+      "failure_class": "distributed feature-composition failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17706"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17713,
+      "title": "310P release image missing vllm_ascend_C crashes GDN models on first forward",
+      "failure_class": "release packaging/runtime crash",
+      "status": "open",
+      "root_cause": "The published image omits the compiled extension required by Qwen3.5/Qwen3-Next GDN operators.",
+      "fix_prs": [],
+      "last_checked": "2026-09-29",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17713"
     }
   ]
 }
