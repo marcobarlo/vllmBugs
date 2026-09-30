@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-29",
+  "updated_at": "2026-09-30",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries marked last_known_* were not all revalidated on this date.",
   "bugs": [
     {
@@ -1756,9 +1756,9 @@
       "title": "MoRIIO producer death leaves decode requests hung and KV usage elevated",
       "failure_class": "distributed failure propagation/KV leak",
       "status": "open",
-      "root_cause": "Producer failure is not propagated into terminal request cleanup on the decode side.",
+      "root_cause": "Producer failure is not propagated into terminal decode-side cleanup. A receive timeout can terminate request waiting but does not prove the old transfer has stopped, so KV blocks cannot safely be reused until completion/cancellation/recovery establishes write termination.",
       "fix_prs": [],
-      "last_checked": "2026-09-29",
+      "last_checked": "2026-09-30",
       "url": "https://github.com/vllm-project/vllm/issues/59114"
     },
     {
@@ -1892,6 +1892,399 @@
       "fix_prs": [],
       "last_checked": "2026-09-29",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/17713"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59381,
+      "title": "Qwen3.5 merged BF16 intermittently emits NaN-corrupted token-0 output",
+      "failure_class": "silent numerical corruption",
+      "status": "open",
+      "root_cause": "Intermittent non-finite logits are observed in vLLM while the same frozen weights/input remain finite in the Transformers control; exact kernel/cache attribution is unconfirmed.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59381"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59375,
+      "title": "SIGTERM during engine startup is swallowed and API waits for readiness timeout",
+      "failure_class": "process lifecycle/startup liveness",
+      "status": "open",
+      "root_cause": "zmq_socket_ctx catches the KeyboardInterrupt raised by the SIGTERM handler during engine launch, leaving MPClient waiting for READY.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59375"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59352,
+      "title": "Hopper NVSwitch NVLS can make single-request TP inference non-reproducible",
+      "failure_class": "distributed numerical nondeterminism",
+      "status": "open",
+      "root_cause": "On affected Hopper driver/Fabric Manager versions, NVLS all-reduce is nondeterministic; disabling NVLS restored repeatability in the reported configuration.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59352"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59345,
+      "title": "Whisper verbose_json can return empty text when no timestamp token is emitted",
+      "failure_class": "API output corruption/format semantics",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59345"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59317,
+      "title": "Sparse-indexer DCP top-k merge can OOM on the first long prefill",
+      "failure_class": "memory accounting/runtime OOM",
+      "status": "open",
+      "root_cause": "DCP top-k merge materializes packed, all-gather, and moved copies whose transient memory scales with DCP*T*K, but startup profiling does not account for that peak.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59317"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59312,
+      "title": "Gemma 4 AutoRound MoE scale shape mismatch prevents model loading",
+      "failure_class": "quantized model loading/startup failure",
+      "status": "open",
+      "root_cause": "The effective WNA16 grouping used for the routed-expert w2 scale layout disagrees with the checkpoint's partial final quantization group.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59312"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59306,
+      "title": "GLM-5.3 NVFP4 with DCP and MTP fails startup on Hopper",
+      "failure_class": "feature composition/startup failure",
+      "status": "open",
+      "root_cause": "One observed path constructs an NVFP4 MTP shared head for a weight absent from the checkpoint; the GLM target configuration is hidden by the speculative draft config rewrite.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59306"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59305,
+      "title": "FlashMLA sparse decode regresses to multi-GiB split-KV workspace on SM90",
+      "failure_class": "accelerator memory safety/runtime OOM risk",
+      "status": "open",
+      "root_cause": "A FlashMLA sync dropped the num_sm_parts>1 allocation guard, so SM90 mixed-batch sparse decode allocates split-KV accumulators even when no actual split is needed.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59305"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59292,
+      "title": "Draft-model speculative decoding fails for Transformers-backend models",
+      "failure_class": "backend composition/startup failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59292"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59273,
+      "title": "Thinking-budget batch compaction can leak stale per-request state",
+      "failure_class": "cross-request scheduler state corruption",
+      "status": "open",
+      "root_cause": "On a unidirectional batch move, the destination slot is not cleared when the incoming request has no thinking-budget state, so the departed request's state can survive.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59273"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59272,
+      "title": "Spec decode with zero drafts maps thinking-budget enforcement to logits row 0",
+      "failure_class": "cross-request logits corruption",
+      "status": "open",
+      "root_cause": "When a speculative step has no draft tokens, cumulative logits-row offsets stay zero for all requests, so forced end-thinking tokens for multiple requests are applied to row 0.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59272"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59250,
+      "title": "Kimi-K3 warmup import can crash every model under read-only/non-root deployment",
+      "failure_class": "startup availability/environment isolation",
+      "status": "open",
+      "root_cause": "Generic kernel warmup imports Kimi-K3 code before checking model type; import-time numba caching then requires a writable cache path even for non-Kimi models.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59250"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59248,
+      "title": "Qwen3-Coder-Next AutoRound routed gate ignores checkpoint quantization and fails loading",
+      "failure_class": "quantized model loading/startup failure",
+      "status": "open",
+      "root_cause": "The routed MoE gate is instantiated without the checkpoint quantization config, so vLLM expects an unquantized weight while the checkpoint contains qweight.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59248"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59242,
+      "title": "DeepEP v2 faults on first multi-node call with incompatible GDAKI context ABI",
+      "failure_class": "distributed communication ABI/device crash",
+      "status": "open",
+      "root_cause": "The tested cu134 image combines NCCL using an 88-byte GDAKI context with a Spectrum-X plugin compiled for a 72-byte context, causing invalid device access.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59242"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59230,
+      "title": "AOT cache can reuse a stale quantization-kernel artifact and crash",
+      "failure_class": "compiled-artifact identity/runtime crash",
+      "status": "open",
+      "root_cause": "The AOT cache key does not encode layer-construction-time quantization kernel selection, so a same-version kernel switch can load code traced for a different kernel layout.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59230"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59222,
+      "title": "Mistral legacy tool parser can fail valid requests on unexpected JSON shapes",
+      "failure_class": "API parser fault containment",
+      "status": "open",
+      "root_cause": "The pre-v11 non-streaming parser assumes a list of named tool-call objects and lets shape/type errors escape as request failures.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59222"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59218,
+      "title": "Engine-based tool parsers drop text around tool calls in non-streaming responses",
+      "failure_class": "API semantic/output corruption",
+      "status": "open",
+      "root_cause": "The non-streaming ParserEngine path discards text following or between tool calls even though the streaming path preserves it.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59218"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59212,
+      "title": "Mistral tokenizer can reject or alias OpenAI-valid tool-call IDs",
+      "failure_class": "API contract/session corruption",
+      "status": "open",
+      "root_cause": "truncate_tool_call_ids keeps only the final nine characters, rejecting short/nonconforming IDs and allowing distinct IDs to collide after truncation.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59212"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59203,
+      "title": "DeepSeek-V4.1-Flash cannot start on SM120 due to sparse-MLA page-size mismatch",
+      "failure_class": "backend capability negotiation/startup failure",
+      "status": "open",
+      "root_cause": "Compressed layers derive page_block_size=32, while the available FlashInfer SM120 DSV4 sparse-MLA decode kernels are instantiated only for page_block_size=64.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59203"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59189,
+      "title": "GB200 DP4+EP serving crashes in NCCL symmetric reduce-scatter",
+      "failure_class": "distributed collective crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59189"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59185,
+      "title": "B200 cross-node TP startup can hang during communicator initialization without MNNVL",
+      "failure_class": "distributed startup deadlock/liveness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59185"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59184,
+      "title": "DFlash DCP slot mapping uses the wrong block-size domain for ownership",
+      "failure_class": "distributed KV slot-mapping corruption",
+      "status": "open",
+      "root_cause": "DFlash uses the attention kernel block size for DCP ownership/local-position calculations even when physical KV-manager and kernel block sizes differ.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59184"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59181,
+      "title": "Batch-invariant mode is not batch-invariant for SM120 pooling models",
+      "failure_class": "numerical reproducibility/batch isolation",
+      "status": "open",
+      "root_cause": "Batch-invariant GEMM overrides do not cover SM120, so execution falls back to cuBLAS paths whose tile choice depends on batch shape.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59181"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59176,
+      "title": "GLM-5.3-Flash HiSparse has no compatible KV-cache layout",
+      "failure_class": "KV layout capability/startup failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59176"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59161,
+      "title": "MRV2 speculative decoding can apply lm_head LoRA to another request's logits",
+      "failure_class": "cross-request adapter-state corruption",
+      "status": "open",
+      "root_cause": "The logits-side LoRA mapping is built per request rather than per logits row, so speculative decoding misaligns adapter IDs with each request's sampled rows.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59161"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59151,
+      "title": "ROCm MXFP4 MoE auto-selection can leave pre-CDNA3 GPUs with no working backend",
+      "failure_class": "backend capability selection/startup failure",
+      "status": "open",
+      "root_cause": "Automatic ROCm MXFP4 backend selection omits the working TRITON_UNFUSED path on gfx90a-class hardware.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm/issues/59151"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17797,
+      "title": "Long chunked-prefill inputs can produce corrupted embeddings on Ascend 310P",
+      "failure_class": "silent embedding corruption",
+      "status": "open",
+      "root_cause": "The corruption is tied to chunked prefill in the reported setup; disabling chunked prefill restores reference-like embeddings, but the exact faulty state path is unconfirmed.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17797"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17761,
+      "title": "A5 DeepSeek-V4 BF16 KV scatter can overwrite a live slot with padded rows",
+      "failure_class": "KV-cache memory/state corruption",
+      "status": "closed",
+      "root_cause": "The BF16 sparse-MLA scatter path clamps PAD_SLOT_ID=-1 to slot 0 before scatter, overwriting live KV state; related graph-capture metadata handling also diverges from the FP8 path.",
+      "fix_prs": [
+        15867
+      ],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17761"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17760,
+      "title": "Sleep-mode KV pool tags persistent runner metadata and breaks wake-up",
+      "failure_class": "sleep/wake lifecycle/state corruption",
+      "status": "closed",
+      "root_cause": "The allocator pool scopes the entire KV-cache initialization, causing graph-persistent metadata to inherit a discardable kv_cache tag and lose backing storage across sleep/wake.",
+      "fix_prs": [
+        16096
+      ],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17760"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17756,
+      "title": "P/D proxy forwards over-length requests without preserving validation errors",
+      "failure_class": "distributed request validation/fault propagation",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17756"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17754,
+      "title": "A2 P/D boundary-length request can fail KV receive and time out",
+      "failure_class": "distributed KV transfer/liveness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17754"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17744,
+      "title": "MRV2 forced load balancing crashes on forward-context field mismatch",
+      "failure_class": "runner compatibility/startup crash",
+      "status": "open",
+      "root_cause": "The force-EPLB path directly reads moe_comm_method as a ForwardContext attribute, while MRV2 stores extension fields in additional_kwargs and requires the existing proxy.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17744"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17731,
+      "title": "FP8 RoPE fails to compile on Ascend 910B3",
+      "failure_class": "compiler/backend availability",
+      "status": "open",
+      "root_cause": "The Triton Ascend lowering path cannot lower the f32-to-E4M3FN truncation emitted for FP8 RoPE output on the tested compiler/runtime.",
+      "fix_prs": [],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17731"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17729,
+      "title": "DSA-CP FULL graph replay can reuse stale metadata and corrupt DeepSeek-V4.1-Flash output",
+      "failure_class": "graph replay/stale-state silent corruption",
+      "status": "closed",
+      "root_cause": "FULL_DECODE_ONLY capture can bind capture-time CP metadata or sparse-index storage; a zero-cache dummy capture can also freeze the empty-cache branch, so replay publishes stale/invalid sparse indices.",
+      "fix_prs": [
+        17750
+      ],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17729"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17710,
+      "title": "MRV2 prepare_inputs signature diverges from upstream num_active_loras interface",
+      "failure_class": "upstream interface compatibility/runtime crash",
+      "status": "open",
+      "root_cause": "Ascend MRV2 overrides retained the prior three-argument prepare_inputs signature after upstream added num_active_loras.",
+      "fix_prs": [
+        17140
+      ],
+      "last_checked": "2026-09-30",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17710"
     }
   ]
 }
