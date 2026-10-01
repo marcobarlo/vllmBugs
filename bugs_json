@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-30",
+  "updated_at": "2026-10-01",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries marked last_known_* were not all revalidated on this date.",
   "bugs": [
     {
@@ -1754,11 +1754,11 @@
       "repo": "vllm-project/vllm",
       "issue_number": 59114,
       "title": "MoRIIO producer death leaves decode requests hung and KV usage elevated",
-      "failure_class": "distributed failure propagation/KV leak",
+      "failure_class": "distributed failure propagation/KV reclamation liveness",
       "status": "open",
-      "root_cause": "Producer failure is not propagated into terminal decode-side cleanup. A receive timeout can terminate request waiting but does not prove the old transfer has stopped, so KV blocks cannot safely be reused until completion/cancellation/recovery establishes write termination.",
+      "root_cause": "Producer failure is not propagated into terminal decode-side cleanup. A receive timeout may fail the client request but does not establish that the old transfer can no longer write its destination, so safe block reuse requires a separate transfer-termination signal; observed KV usage stayed elevated for 295-388 seconds after clients timed out.",
       "fix_prs": [],
-      "last_checked": "2026-09-30",
+      "last_checked": "2026-10-01",
       "url": "https://github.com/vllm-project/vllm/issues/59114"
     },
     {
@@ -2285,6 +2285,165 @@
       ],
       "last_checked": "2026-09-30",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/17710"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59562,
+      "title": "MiniMax-M3 fails engine startup with transformers 5.18.0",
+      "failure_class": "dependency compatibility/startup availability",
+      "status": "open",
+      "root_cause": "Transformers 5.18 moved RGB conversion out of BaseVideoProcessor._preprocess, while vLLM's MiniMaxM3VLVideoProcessor override still requires the removed do_convert_rgb argument.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59562"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59415,
+      "title": "Qwen3.6 FP8 TP4 returns gibberish on Intel B70",
+      "failure_class": "silent distributed inference corruption",
+      "status": "open",
+      "root_cause": "Unconfirmed. A closely related Intel B70 report (#59551) observes the same model family returning gibberish under TP2+DP2; that duplicate-family report is not stored separately.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59415"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59457,
+      "title": "W4A8 gpt-oss-20b BF16 produces garbled output on ARM CPU",
+      "failure_class": "silent quantized inference corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59457"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59449,
+      "title": "Layerwise weight reload leaves routed-expert output stale on monolithic FP8 MoE",
+      "failure_class": "post-reload observability/output state corruption",
+      "status": "open",
+      "root_cause": "FP8 post-load processing rebuilds the monolithic MoE kernel after the routed-expert capture callback was bound, so the new fused_experts object has no capture callback and the exposed routing buffer remains at startup-profile contents.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59449"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59440,
+      "title": "HiSparse admission under GPU-pool pressure can crash EngineCore",
+      "failure_class": "KV admission accounting/engine crash",
+      "status": "closed",
+      "root_cause": "HiSparse host-prefix admission can overestimate free GPU blocks instead of adopting still-valid GPU copies; the later hot-region allocation then fails with 'Cannot get N free blocks' and kills the engine.",
+      "fix_prs": [
+        59282
+      ],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59440"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59416,
+      "title": "GLM-5.3-Flash crashes on ROCm gfx942 in sparse indexer path",
+      "failure_class": "accelerator runtime/engine crash",
+      "status": "closed",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59416"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59413,
+      "title": "GLM-5.3-Flash emits gibberish at low concurrency on ROCm gfx950",
+      "failure_class": "load-dependent silent inference corruption",
+      "status": "open",
+      "root_cause": "Unconfirmed; the reported MI350/gfx950 configuration is severely corrupt at low concurrency while the same workload becomes accurate at high concurrency.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59413"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59409,
+      "title": "V2 runner can reuse KV pages before pending connector saves are drained",
+      "failure_class": "KV lifecycle/order violation/potential cross-request corruption",
+      "status": "open",
+      "root_cause": "V2 execute_model applies request-state updates, including page zeroing and copy-on-write, before ActiveKVConnector invokes handle_preemptions; an asynchronous save can therefore still be reading a physical page after reuse has begun.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59409"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59403,
+      "title": "Marlin int8-activation path reads signed group scales as unsigned",
+      "failure_class": "silent quantization/numerical corruption",
+      "status": "open",
+      "root_cause": "The preprocessing stores requantized group scales as int16, but the CUDA path reinterprets them as uint16; negative scales become large positive values and silently corrupt affected weight groups.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59403"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59394,
+      "title": "DeepSeek-V4.1-Flash Engram sharding prevents TP16 startup",
+      "failure_class": "distributed capability/startup failure",
+      "status": "open",
+      "root_cause": "Engram hash heads are sharded directly over tensor-parallel degree; with 24 hash columns, the current assertion rejects TP16 because ceil(24/16)*(16-1) exceeds the available hash-head count.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59394"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59513,
+      "title": "top_logprobs semantics diverge across coupled, disaggregated, Python and Rust endpoints",
+      "failure_class": "API semantic/output inconsistency",
+      "status": "open",
+      "root_cause": "The engine logprob map places the sampled token before ranked candidates, while frontend and derender paths slice and deduplicate that representation differently when the sample falls outside top-k.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm/issues/59513"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17855,
+      "title": "Dual-node RoCE DeepSeek-V4.1-Flash W8A8 hits remote accelerator communication failure",
+      "failure_class": "distributed communication/availability failure",
+      "status": "open",
+      "root_cause": "Unconfirmed. The same report was re-filed as #17857; the duplicate issue is intentionally not stored separately.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17855"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17856,
+      "title": "310P recurrent GDN kernel can silently abort an entire ragged MTP batch",
+      "failure_class": "batch-wide recurrent-state/output corruption",
+      "status": "open",
+      "root_cause": "The v310 kernel validates previous-step accepted-token count against the current query length and executes a kernel-wide return inside the per-request loop; a legal ragged speculative step can therefore leave the whole batch output unwritten.",
+      "fix_prs": [],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17856"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 17837,
+      "title": "Ragged MTP structured-output batches can read another request's GDN state",
+      "failure_class": "cross-request recurrent-state corruption",
+      "status": "open",
+      "root_cause": "The recurrent-state table is fixed-width per request, but the affected GDN path indexed rows using packed current-query offsets; grammar-trimmed speculative batches with unequal verify lengths can therefore read the wrong request's recurrent state.",
+      "fix_prs": [
+        17839,
+        17854
+      ],
+      "last_checked": "2026-10-01",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/17837"
     }
   ]
 }
