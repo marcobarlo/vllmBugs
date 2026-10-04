@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01",
+  "updated_at": "2026-10-04",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries marked last_known_* were not all revalidated on this date.",
   "bugs": [
     {
@@ -2444,6 +2444,314 @@
       ],
       "last_checked": "2026-10-01",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/17837"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59920,
+      "title": "Legacy fused_moe_lora kernel silently casts fp16 LoRA operands to bfloat16",
+      "failure_class": "silent numerical/adapter corruption",
+      "status": "open",
+      "root_cause": "The legacy two-kernel fused MoE LoRA path hardcodes BF16 operand casts for tl.dot instead of preserving the model's native FP16 dtype.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59920"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59919,
+      "title": "prompt_embeds per-part decode limit permits request-level memory amplification",
+      "failure_class": "request memory isolation/availability",
+      "status": "open",
+      "root_cause": "Decoded embedding limits are enforced per content part, with no aggregate request budget; parts are densified and retained before a second combined prompt tensor is allocated.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59919"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59907,
+      "title": "Priority scheduler can unschedule an already-scheduled request in the same step",
+      "failure_class": "scheduler rollback/state corruption",
+      "status": "open",
+      "root_cause": "Priority victim selection can choose a request already scheduled earlier in the same step; rollback restores token/block budgets but not encoder-cache allocation or eager KV hash registration, exposing unwritten state and crash paths.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59907"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59905,
+      "title": "Gemma 4 E4B AutoRound-GPTQ fails to load because audio tower expects unquantized weight",
+      "failure_class": "quantization compatibility/startup failure",
+      "status": "open",
+      "root_cause": "The current loader expects an unquantized audio-tower .weight while the checkpoint contains GPTQ quantized tensors for that tower; the same checkpoint served on an older release.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59905"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59904,
+      "title": "FlashInfer MoE-EP DeepGEMM backend double-loads vendored pybind runtime",
+      "failure_class": "backend integration/startup crash",
+      "status": "open",
+      "root_cause": "vLLM aliases only the top-level vendored deep_gemm package; FlashInfer submodule imports reload the pybind extension under deep_gemm._C and pybind11 rejects duplicate Runtime type registration.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59904"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59903,
+      "title": "FlashInfer CuTeDSL MoE-EP backend is selectable without required nvshmem4py",
+      "failure_class": "dependency capability/startup failure",
+      "status": "open",
+      "root_cause": "Backend selection does not verify the nvshmem4py dependency, so model loading proceeds until FlashInfer bootstraps NVSHMEM and import nvshmem.core fails.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59903"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59887,
+      "title": "FlashInfer CuTeDSL MoE-EP adapter uses API newer than pinned FlashInfer",
+      "failure_class": "dependency API/startup failure",
+      "status": "open",
+      "root_cause": "vLLM passes enable_in_kernel_fc2_reduce, but pinned FlashInfer 0.7.0.post1 exposes the field as in_kernel_fc2_reduce; layer construction raises TypeError.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59887"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59876,
+      "title": "Request-level chat_template_kwargs silently drops multimodal images",
+      "failure_class": "silent multimodal input corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59876"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59872,
+      "title": "Aborted NIXL pull with stuck READ leaks decode KV blocks until restart",
+      "failure_class": "KV lifecycle/resource leak",
+      "status": "open",
+      "root_cause": "Abort defers KV freeing until all receive workers report finished; a NIXL READ stuck in PROC has no deadline and the abort does not terminate that receive-side transfer, so the request's blocks remain pinned.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59872"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59871,
+      "title": "NIXL heartbeats do not refresh engine TTL and trigger re-handshakes for live peers",
+      "failure_class": "distributed connection lifecycle/availability",
+      "status": "open",
+      "root_cause": "Engine last-active time is updated on handshake/read but not heartbeat; a live peer with queued requests can therefore age past engine_ttl and be evicted/reloaded during its own heartbeat path.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59871"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59870,
+      "title": "NIXL connector uses one unsynchronized agent from two threads",
+      "failure_class": "distributed connector race/state safety",
+      "status": "open",
+      "root_cause": "Handshake and engine threads concurrently call a NIXL agent created without thread synchronization; NIXL defaults to no synchronization in this mode and relevant bindings release the GIL.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59870"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59868,
+      "title": "PLE CPU-offload FP8 lookup cannot compile on sm_86",
+      "failure_class": "hardware capability/startup failure",
+      "status": "open",
+      "root_cause": "The pinned-host PLE lookup uses fp8e4nv, which is unsupported by the Triton target on consumer Ampere sm_86, making the required CPU-offload path unusable.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59868"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59867,
+      "title": "GLM-5.3-Flash NVFP4 + MTP builds BF16 draft experts as packed NVFP4",
+      "failure_class": "quantization/model-state startup crash",
+      "status": "closed",
+      "root_cause": "The global quantization config is applied to the MTP draft layer even though that checkpoint layer is BF16 and excluded from NVFP4 quantization, yielding incompatible packed expert buffer shapes.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59867"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59838,
+      "title": "Malformed namespace tools bypass ResponsesRequest tool-choice validation",
+      "failure_class": "API validation/semantic integrity",
+      "status": "closed",
+      "root_cause": "The namespace-tool validator returns the request early when nested tools is not a list, bypassing subsequent tool_choice validation instead of skipping the malformed namespace.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59838"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59834,
+      "title": "Responses streaming regenerates output item and call IDs in response.completed",
+      "failure_class": "streaming protocol/identity corruption",
+      "status": "closed",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59834"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59828,
+      "title": "CPU async output snapshots can alias reused sampler buffers",
+      "failure_class": "asynchronous buffer aliasing/output corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59828"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59818,
+      "title": "Nemotron-H inference shows reproducible run-to-run accuracy variance on ROCm",
+      "failure_class": "nondeterministic inference correctness",
+      "status": "open",
+      "root_cause": "The reported variance persists even though the tested prompts do not reload KV from the offload tier, so KV offload itself is not the identified cause.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59818"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59803,
+      "title": "Expert-parallel engine fails to start with ipc_cache and disk fallback",
+      "failure_class": "weight-loading/startup failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59803"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59799,
+      "title": "PEFT rank_pattern/alpha_pattern LoRA adapters use incorrect scaling",
+      "failure_class": "silent adapter numerical corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59799"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59798,
+      "title": "Qwen3.8 AutoRound/INC checkpoint startup fails on unquantized PLE",
+      "failure_class": "quantization capability/startup failure",
+      "status": "open",
+      "root_cause": "The model-level INCConfig is passed to the PLE embedding quantization selector even though PLE is intentionally unquantized; PLE rejects the unsupported config before weights load.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59798"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59786,
+      "title": "V1 CPU fused Gumbel sampler has a finite-table distribution bias",
+      "failure_class": "sampling distribution corruption",
+      "status": "open",
+      "root_cause": "Gumbel noise is drawn from cyclic windows of one fixed 2^20-entry table; for large vocabularies this finite periodic support produces a biased categorical distribution and makes many tokens unreachable.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59786"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59785,
+      "title": "CPU Triton top-p sampler drops tokens required by the probability mass cutoff",
+      "failure_class": "sampling semantic corruption",
+      "status": "open",
+      "root_cause": "The Triton top-p mask can exclude a token even when the retained probability mass remains below p, diverging from the reference PyTorch implementation end to end.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59785"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59784,
+      "title": "Qwen3-VL-Reranker fails to load because text config lacks tie_word_embeddings",
+      "failure_class": "model config/startup failure",
+      "status": "open",
+      "root_cause": "The loader assumes Qwen3VLTextConfig exposes tie_word_embeddings and fails when the attribute is absent.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59784"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59768,
+      "title": "Async CPU-to-GPU prefix load can trigger illegal GPU memory access",
+      "failure_class": "KV offload/device memory crash",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59768"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59764,
+      "title": "Hybrid GDN+MoE batches produce run-to-run and co-batch-dependent logprobs",
+      "failure_class": "nondeterministic/batch-isolation correctness",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59764"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59756,
+      "title": "Qwen3.8-Flash-Next fails startup after upstream layer-type naming change",
+      "failure_class": "upstream config/startup regression",
+      "status": "closed",
+      "root_cause": "After adopting the upstream Qwen4-Exp config, the config emits indexed_attention while the vLLM decoder path rejects that layer-type name.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59756"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59741,
+      "title": "ROCm sparse kpool selection can drop recent context pools",
+      "failure_class": "sparse-attention retrieval correctness",
+      "status": "open",
+      "root_cause": "always_select_tail guarantees only the incomplete tail pool; completed recent pools still compete in top-k and can be excluded, causing nondeterministic failures to retrieve recent context.",
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59741"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 59738,
+      "title": "DeepSeek-R1 streaming reasoning deltas expose byte-level BPE glyphs",
+      "failure_class": "streaming detokenization/output corruption",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-04",
+      "url": "https://github.com/vllm-project/vllm/issues/59738"
     }
   ]
 }
