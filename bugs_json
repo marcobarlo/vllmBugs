@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-09",
+  "updated_at": "2026-10-16",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries with unverified status have not had issue state revalidated; historical records retain their last checked dates.",
   "bugs": [
     {
@@ -2804,8 +2804,12 @@
       "failure_class": "KV/recurrent/cache-state failure",
       "status": "open",
       "root_cause": null,
-      "fix_prs": [],
-      "last_checked": "2026-10-09",
+      "fix_prs": [
+        58200,
+        46304,
+        49278
+      ],
+      "last_checked": "2026-10-16",
       "url": "https://github.com/vllm-project/vllm/issues/60755"
     },
     {
@@ -3977,10 +3981,12 @@
       "issue_number": 17932,
       "title": "NPU KV-offload copy thread dies silently on any copy exception, stranding every later transfer",
       "failure_class": "silent/broken output",
-      "status": "unverified",
+      "status": "open",
       "root_cause": null,
-      "fix_prs": [],
-      "last_checked": "2026-10-09",
+      "fix_prs": [
+        17933
+      ],
+      "last_checked": "2026-10-16",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/17932"
     },
     {
@@ -4059,6 +4065,393 @@
       "fix_prs": [],
       "last_checked": "2026-10-09",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/10537"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 62003,
+      "title": "mamba_ssm_cache_dtype=\"float16\" crashes mamba-family models at startup — bare kernel assertion with an empty message (selective_scan_fwd.cu:791)",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/62003"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61970,
+      "title": "vLLM EngineCore crash in native KV offloading for hybrid Attention/Mamba model",
+      "failure_class": "KV/recurrent/cache-state failure",
+      "status": "open",
+      "root_cause": "Partial-tail native KV offload can encounter a pending Mamba boundary state beyond the valid token boundary and hit an internal scheduler assertion.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61970"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61966,
+      "title": "MinTokensLogitsProcessor indexes logits with global token ids — out-of-bounds when the LM head output is TP-sharded",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61966"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61954,
+      "title": "pythonic and llama4_pythonic tool parsers break on a raw newline inside a string argument",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61954"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61927,
+      "title": "MiMo-V2 with FP8 KV cache crashes on NVIDIA SM89/SM12x: Triton DiffKV fails to compile (\"K >= 32\"), since v0.32.0rc0",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61927"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61919,
+      "title": "Server exits at startup for OLMo 3: Anthropic merge probe catches only jinja2.TemplateError (TypeError from undefined tools)",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61919"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61912,
+      "title": "KV Connector load-failure report arriving after the owner was preempted: blocks stay cached, fail is not applied, stale output can be delivered",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "A preempted request releases physical blocks before its delayed KV-load failure is processed, leaving no durable ownership mapping for invalidation.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61912"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61905,
+      "title": "KV Connector late load-failure reports affect unrelated requests after block-ID reuse",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "Delayed invalid-block reports are keyed by reusable physical block IDs rather than stable request/block generations, so a later owner can be invalidated.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61905"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61859,
+      "title": "HiSparse shutdown stalls ~90s: every TP rank unpins the full shared host pool and EngineCore blocks on dying workers",
+      "failure_class": "liveness/deadlock",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61859"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61853,
+      "title": "enable_lora on Jamba causes a CUDA illegal memory access followed by an uncaught C++ exception during startup",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61853"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61847,
+      "title": "dtype=\"float32\" crashes unquantized MoE models at startup on SM89 — Triton fused-MoE selects an oversized shared-memory kernel",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61847"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61820,
+      "title": "Whisper long-audio transcription loses words at internal 30 s cut points",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "Audio splitting can cut inside speech without overlap/merge recovery, dropping words at chunk boundaries.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61820"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61803,
+      "title": "triton unified_attention reads block_table out-of-bounds past the used columns",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61803"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61802,
+      "title": "fused_recurrent KDA path loads the per-key gate g without a mask, resulting in out-of-bounds reads",
+      "failure_class": "KV/recurrent/cache-state failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61802"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61800,
+      "title": "fused_recurrent_gated_delta_rule allocates final_state for one sequence but writes it for the whole batch, resulting in out-of-bounds writes",
+      "failure_class": "KV/recurrent/cache-state failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61800"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61768,
+      "title": "KV Connector abort before load-failure processing leaves invalid prefix-cache blocks reusable",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "Request abort can free blocks before delayed load-failure processing, allowing invalid prefix-cache state to remain reusable.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61768"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61766,
+      "title": "bench forward verify cases exceeding draft capacity trigger CUDA illegal memory access",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61766"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61762,
+      "title": "Scheduler livelock with multi-module MTP + Mamba align prefix caching",
+      "failure_class": "liveness/deadlock",
+      "status": "open",
+      "root_cause": "An alignment/lookahead corner case can cause the scheduler to assign zero tokens indefinitely after the first chunk.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61762"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61738,
+      "title": "Wide speculative decoding verify silently samples EOS early on hybrid GDN models",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61738"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 61730,
+      "title": "lightning_attention prefill applies one decay step too few to stored state",
+      "failure_class": "KV/recurrent/cache-state failure",
+      "status": "open",
+      "root_cause": "Stored recurrent state is advanced with an off-by-one decay, producing wrong tokens after the boundary or when continuing from non-zero history.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm/issues/61730"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19022,
+      "title": "DeepSeek-V4.1-Flash decode hang with MoeDistributeDispatchV2 faults during PD burst admission on A3",
+      "failure_class": "liveness/deadlock",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19022"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19021,
+      "title": "Mooncake AscendDirectTransport KV transfer fails 100% on PD disaggregated deployment with EI0014 device_ip invalid",
+      "failure_class": "KV/recurrent/cache-state failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19021"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18997,
+      "title": "Structured-output drafts can bypass grammar masking in Ascend rejection sampler",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "Speculative draft rows can escape the structured-output grammar mask and leave the scheduler with a token sequence the grammar FSM cannot advance.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18997"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18978,
+      "title": "GLM-5.3-Flash KDA decode-FULL ACL-Graph capture fails because patch_triton references a removed causal_conv1d_update_npu symbol",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": "A stale patch binding falls back to a per-request-synchronizing implementation that is incompatible with the expected decode graph capture path.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18978"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18977,
+      "title": "GLM-5.3-Flash fails on first inference on default A5 image because sparse_flash_mla kernel is missing",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": "The shipped CANN image exposes the sparse Flash MLA API/header but lacks the required ascend950 kernel implementation.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18977"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18951,
+      "title": "GLM-5.3-Flash-w8a8 1P1D deployment crashes at 256K/2K although 128K/2K succeeds",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18951"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18945,
+      "title": "RDMA link establishment failed for memcache on v0.30.0rc2",
+      "failure_class": "engine/process or lifecycle failure",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18945"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18898,
+      "title": "KVPool MRV2 Mamba align mode produces garbled output after restoring a prefix from KVPool",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18898"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18864,
+      "title": "DeepSeek-V4-Flash with MTP can rarely emit a tool tag missing its opening tag",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18864"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18859,
+      "title": "MLAPO hardcodes RMSNorm epsilon instead of honoring model rms_norm_eps",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "MLAPO uses a fixed 1e-6 RMSNorm epsilon rather than the checkpoint configuration, changing numerical semantics.",
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18859"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18828,
+      "title": "Qwen3.8-27B inference hangs with AI Core error 507057 under TP4 + MTP + FULL_DECODE_ONLY",
+      "failure_class": "liveness/deadlock",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18828"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18807,
+      "title": "GLM-5.3-Flash A3 3P+1D service hangs on multimodal requests",
+      "failure_class": "liveness/deadlock",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18807"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18804,
+      "title": "4-node A2 PD + Mooncake KV Pool: both Prefill engines hang at 61% pool watermark after AscendStore batch_put failures",
+      "failure_class": "liveness/deadlock",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18804"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18794,
+      "title": "Hybrid AscendStore KV load failures are skipped and can corrupt output",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18794"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 18769,
+      "title": "FA3 addresses real interleaved K/V cache layout incorrectly, causing abnormal model output",
+      "failure_class": "silent/broken output",
+      "status": "open",
+      "root_cause": "FA3 computes addresses as if K/V pages were tightly packed while the real cache uses an interleaved layout.",
+      "fix_prs": [
+        18729
+      ],
+      "last_checked": "2026-10-16",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/18769"
     }
   ]
 }
