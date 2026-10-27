@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-16",
+  "updated_at": "2026-10-27",
   "note": "Cumulative public vLLM/vLLM-Ascend correctness and availability failure ledger. Entries with unverified status have not had issue state revalidated; historical records retain their last checked dates.",
   "bugs": [
     {
@@ -4452,6 +4452,890 @@
       ],
       "last_checked": "2026-10-16",
       "url": "https://github.com/vllm-project/vllm-ascend/issues/18769"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63997,
+      "title": "[Bug]: NixlConnector fails at startup with \"KV cache view cannot be partitioned into NIXL regions\" when KV cache groups have different block sizes (Gemma 4)",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63997"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63990,
+      "title": "[Bug]: INC ignores per-layer datatype and packing-format overrides",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [
+        63991
+      ],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63990"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63984,
+      "title": "[Bug]: Flint fails to start with --tensor-parallel-size 4 (silu_and_mul assert); TP8 fails Triton compile",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63984"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63983,
+      "title": "[Bug]: FunctionGemma tool parser drops every non-string argument (numbers, booleans, arrays, objects)",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63983"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63948,
+      "title": "[Bug]: KV offload P2P tier: reset_cache() fails an assert on a prefill node with stores waiting for the decoder",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63948"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63945,
+      "title": "[Bug]: FLEX_ATTENTION fails on EmbeddingGemma 2 (encoder-only): create_block_mask compiled with mode=\"reduce-overhead\" returns CUDAGraph outputs that get overwritten",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63945"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63944,
+      "title": "[Bug]: int8_per_token_head scale-view fill overwrites Gated DeltaNet state in hybrid models",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63944"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63941,
+      "title": "[Bug]: Kimi K3 non-streaming content leaks truncated XTML marker fragments",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [
+        51400,
+        63327,
+        57353,
+        50258
+      ],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63941"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63924,
+      "title": "[Bug]: Pinned LoRA adapter makes the scheduler over-admit adapters: worker evicts one the batch needs and EngineCore dies with KeyError in convert_mapping",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63924"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63906,
+      "title": "[Bug]: FunctionGemma converts escape-delimited string literals into numbers, booleans and null",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63906"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63844,
+      "title": "[Bug]: Hybrid Mamba/GDN target + shorter drafter fails config validation on the V2 model runner (--mamba-block-size can only be set with --enable-prefix-caching), regression from #63251",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63844"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63813,
+      "title": "[Bug]: [CPU][Arm] W4A16 inference fails with missing cpu_gemm_wna16 operator",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63813"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63811,
+      "title": "[Bug][HiSparse][P/D]: Long decode collapses into all-NaN logits (sampler emits token 1023 forever) on GLM-5.3 with HiSparse + NIXL",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63811"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63759,
+      "title": "[Bug]: Qwen3.5: int32 token-offset overflows in three Triton kernels give wrong outputs or illegal memory access at large `--max-num-batched-tokens`",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63759"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63751,
+      "title": "[Bug]: IndexError in _create_chat_logprobs / _create_completion_logprobs (top_logprobs shorter than token_ids) causes 500s",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63751"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63732,
+      "title": "[Bug]: Gemma 4 + online --quantization fp8: image requests crash since v0.23.0 (FP8-cast pixel values reach quantized patch_embedder.input_proj); v0.22.0 works",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63732"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63693,
+      "title": "[Bug]: P/D disaggregation (NixlConnector): decode output differs from a non-disaggregated run whenever repetition_penalty != 1.0",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63693"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63667,
+      "title": "[Bug]: Incremental detokenization goes quadratic on malformed UTF-8 output, stalling the API server event loop (`/health` hangs)",
+      "failure_class": "liveness/availability loss",
+      "status": "unverified",
+      "root_cause": "both incremental detokenizers hold a token back while the decoded text ends in an incomplete UTF-8 sequence, and never advance their window until a complete character appears:",
+      "fix_prs": [
+        63668
+      ],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63667"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63662,
+      "title": "[Bug]: MoE models crash at startup on torch 2.11.0 with default VLLM_USE_LAYERNAME=1 (inductor assert __obj_flatten__ on hoisted LayerName)",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63662"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63654,
+      "title": "[Bug]: KV offload OBJ tier keys ignore blocks_per_chunk, so runs with different chunk sizes share object keys",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63654"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63653,
+      "title": "[Bug]: OffloadingConnector loads never-written KV for sliding-window layers when offloaded chunks span several GPU blocks",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63653"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63646,
+      "title": "[Bug]: Encountered an inference error when performing a single LLM API request with Qwen 3.6-27B on a server equipped with 8 A100 GPUs with latest vllm docker images",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63646"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63635,
+      "title": "[Bug]: Transformers backend: compile_mm_encoder fails for most HF vision encoders (3 separate blockers)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": "torch.split(tensor, lengths.tolist(), dim=2) for tensor in (query_states, key_states, value_states)  # transformers/models/qwen3_vl/modeling_qwen3_vl.py:299 in forward",
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63635"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63630,
+      "title": "GPTQ dynamic ignores silently fail for Qwen3.5-family checkpoints: three module-name spaces",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63630"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63620,
+      "title": "[Bug][Hybrid models] Padding rows of graph-replayed decode batches point recurrent state at `NULL_BLOCK_ID`, which aliases the shared null page",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63620"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63615,
+      "title": "allocate_kv_cache raises StopIteration when a PP rank owns none of a KV group's layers",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63615"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63602,
+      "title": "[Bug]: P2P KV offload tier does not fail fast on peer faults",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63602"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63598,
+      "title": "[Bug]: Qwen3.5/3.6 MoE GPTQ checkpoint with BF16 fused MTP experts: `mtp.layers.0.mlp.experts has no parameter 'w2_weight'` (plain `gptq` path, related to #36954)",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63598"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63597,
+      "title": "[Bug]: [ROCm][RDNA4] `RDNAHybridW4A16LinearKernel` is still auto-selected for GPTQ and fails with `zp shape mismatch` (follow-up to #51971)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63597"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63593,
+      "title": "[Bug]: MTP speculative decoding with forced-reject diverges from target-only with confident margins on Qwen3.8-27B (GDN hybrid) at K>=5, n>=8, L>=192",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63593"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63591,
+      "title": "[Bug]: Logprobs include the EOS token that the returned text omits (chat and completions)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63591"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63584,
+      "title": "[Bug][Rust Frontend] Tool requests return 500 on every request when the `auto` tool parser cannot resolve a parser for the model",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63584"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63581,
+      "title": "[Bug]: Streamed tool_call `index` skips calls the parser rejects; the OpenAI SDK stream helper raises IndexError (GLM-4.7, MiniMax-M2, Kimi-K2)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": "`ParserEngine._emit_name_delta` and the other delta builders in `vllm/parser/engine/parser_engine.py` stream `index=<slot index>`. Slots count every call the model opened, including rejected ones, while `_build_extracted_result` (non-streaming) skips rejected",
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63581"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63549,
+      "title": "[Bug]: Async scheduling + preemption crashes Model Runner V1 with KeyError all_token_ids[req_id] in _update_states",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63549"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63536,
+      "title": "[Bug]: [Usage]: RTX PRO 5000 (SM120) deadlocks at 3-4W during vLLM 0.32.0 startup with 70B NVFP4 model, even with --enforce-eager",
+      "failure_class": "liveness/availability loss",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63536"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63519,
+      "title": "[Bug]: Deferred block-free fence (#45357) does not cover speculator `propose()` KV writes in the V2 model runner",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63519"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63514,
+      "title": "[Bug]: `hadacore_transform` gives wrong results for odd row counts (INT4 per-token-head KV cache): garbage K/V and intermittent illegal memory access",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63514"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63507,
+      "title": "[Bug]: CPU backend accepts unsupported attention head sizes; engine dies on first request",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63507"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63505,
+      "title": "[Bug]: Qwen3.8-27B (GDN hybrid) with PP=3 on sm_86: illegal memory access (Xid 31) with prefix caching, gibberish output without it; regression since v0.28.0 (v0.31.0, v0.32.0, both model runners)",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": "** wrong state indexing or binding. Out-of-bounds reads (Xid 31) when align mode allocates extra checkpoint slots, and reads of the wrong-but-valid state (gibberish) without align mode, fit a wrong GDN state index or a wrong layer→cache-tensor binding under PP",
+      "fix_prs": [
+        55601
+      ],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63505"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63499,
+      "title": "[Bug]: P2P KV offload tier: a peer that stalls or is replaced does not recover over RDMA",
+      "failure_class": "liveness/availability loss",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [
+        63498
+      ],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63499"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63480,
+      "title": "[Bug] Responses API silently drops a leading `developer` message for DeepSeek V4 when reasoning is enabled and no tools are set",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63480"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63474,
+      "title": "[Bug]: API server crashes with IndexError in structured-decisions init when tokenizer files are missing (after engine fully loads)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63474"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63467,
+      "title": "[Bug]: Wrong token ids from fastokens' split cache before 0.3.4 (Rust frontend, VLLM_USE_FASTOKENS)",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63467"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63465,
+      "title": "[Bug]: Mooncake Store split-load failures omit unattempted KV blocks from invalidation",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [
+        63464
+      ],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63465"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63414,
+      "title": "[Bug]: compile_mm_encoder is engine-fatal for RADIO/NaViT encoders (Nemotron Parse 3.5)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": "three independent static-shape assumptions",
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63414"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63358,
+      "title": "[Bug]: Hermes tool parser: streaming and non-streaming disagree when a valid tool call is followed by a malformed <tool_call> region",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63358"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63346,
+      "title": "[Bug]: Streaming chat keeps tool calls for `tool_choice: \"none\"` (gpt-oss) and `tool_choice: null`",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63346"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63310,
+      "title": "[Bug]: Responses API rejects assistant input items without \"type\" (output_text content)",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63310"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63309,
+      "title": "[Bug]: Hermes tool parser streaming silently drops all content after a stray <tool_call> marker in prose",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63309"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63663,
+      "title": "[Feature]: Support thinking_token_budget in the Responses API (/v1/responses)",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63663"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63563,
+      "title": "[Bug]: [MRV2] Prompt-logprobs transient memory is not covered by profile_run",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63563"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63942,
+      "title": "[Bug]: [MRV2] Spec-decode rejection sampling is not covered by profile_run",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63942"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63656,
+      "title": "[Bug][Rust Frontend] Streaming chat chunks omit fields that Python emits as null, including finish_reason",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63656"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63650,
+      "title": "[RFC] M-gated HPC-Ops dual-BF16 router GEMM for fp32 MoE router weights on SM90",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63650"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "issue_number": 63340,
+      "title": "[Feature][ROCm][DSv4.1] Mono decode: enable MI350P (gfx950, 128 CUs) via k-pass task decomposition",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm/issues/63340"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19948,
+      "title": "[Bug]: W8A8-MXFP8 + MRv2 EPLB silently corrupts the model after the first rearrangement on A5",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19948"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19947,
+      "title": "[Bug]: 部署DS+moon cake启动报register_local_memory_failed异常",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19947"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19934,
+      "title": "[Bug]: DeepSeek V4.1 aclrtHostRegisterV2 fails with device kernel OOM at TP1",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19934"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19929,
+      "title": "[Bug]: GLM-5.2 IndexShare reuses incorrect Top-K indices across PP stages with DSA-CP",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19929"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19918,
+      "title": "[Bug]: ENCODER_ONLY attention layers run causal in pooling models of hybrid architectures (e.g. Qwen3.5-based)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19918"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19899,
+      "title": "[Bug]: 910B3 TP1 + Engram dp_shared_memory hangs in devmm_ioctl_mem_create",
+      "failure_class": "liveness/availability loss",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19899"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19727,
+      "title": "[Bug]: Prefix caching + M-RoPE models crash with balance scheduling — BalanceScheduler/DyntraLB omit uses_mrope in NewRequestData.from_request",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19727"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19726,
+      "title": "[Bug]: [310P] determine_available_memory() charges other processes' memory to the current instance, yielding negative  available KV cache",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19726"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19722,
+      "title": "[Bug]: Vector core exception (507035) in grouped_matmul_swiglu_quant_v2 kills all TP8 workers under concurrent long-prompt load (Atlas A3, DeepSeek-V4.1-Flash)",
+      "failure_class": "distributed rank/collective failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19722"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19721,
+      "title": "[Bug]: Mooncake KV Cache Pool fails to initialize on A2/910B4: Host memory registration errno 12",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19721"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19720,
+      "title": "[Bug]: FusedInferAttentionScoreV3 device-side MTE fault crashes decode under sustained load (910B, CANN 9.2.0)",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19720"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19707,
+      "title": "[Bug]: Mooncake KV pool SSD offload init fails on A5 RoCE  (fixed upstream in Mooncake PR #4756)",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19707"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19658,
+      "title": "[Bug]: 4机A2 PD分离部署的DSV4.1 1017在调用responses接口时出现D节点推理超时挂死问题",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19658"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19650,
+      "title": "[Bug]: Some requests hang indefinitely after 5+ hours of 200-concurrency accuracy testing with vllm-ascend v0.30.0rc2 and Qwen3.8-27B",
+      "failure_class": "liveness/availability loss",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19650"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19647,
+      "title": "[Bug]: MRV2 KV initialization fails on single-slot wrapped cache components",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19647"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19636,
+      "title": "[Bug]: 0.3kimi-k3 双图子问题：patch_shm_broadcast enqueue 覆写的 overflow 分支丢失 SpinCondition PUB ping——超大 payload（MM embeddings）任务永不送达，EngineCore↔workers 互等楔死",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19636"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19630,
+      "title": "[Bug]: DeepSeek V4.1 Engram gate hard-fail on non-repeated block32 global_rotation",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19630"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19624,
+      "title": "[Bug]: Deepseek v4.1 Flash curl test respone with wrong text or repetition loop",
+      "failure_class": "silent/broken output or state corruption",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19624"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19619,
+      "title": "[Bug] PD 负载均衡代理在非流式请求携带 stream_options 时报错",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19619"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19611,
+      "title": "[Bug]: 在v0.30.0rc2版本中，910B1上PD分离部署Qwen3.8-27B推理压测过程中D节点挂掉",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19611"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19608,
+      "title": "[Bug]: qwen3.8-27B-w8a8 — AICore error (MTE invalid GM access) crash in GDN spec-decode path with MTP + FULL_DECODE_ONLY",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19608"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19605,
+      "title": "[Bug]: [DeepSeekV4-flash-0731] Mooncake connector E1021 06:26:49.437224  6454 transfer_executor_base.cpp:263] Failed to connect to target: 10.233.1.248:20335, status: 103905, errmsg: E19999: Inner Error!",
+      "failure_class": "KV/recurrent/cache-state or transfer failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19605"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19548,
+      "title": "[Bug]: 0.30 kimi-k3 pd分离：TBE 并行编译task_distribute 链路死锁——首个多模态大图请求必现",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19548"
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "issue_number": 19547,
+      "title": "[Bug]: DeepSeek-V4.1-Flash-1017模型基于vllm-ascend: 0.30.0rc2镜像在A2双机上拉起，服频繁崩溃",
+      "failure_class": "engine/process crash or availability failure",
+      "status": "unverified",
+      "root_cause": null,
+      "fix_prs": [],
+      "last_checked": "2026-10-27",
+      "url": "https://github.com/vllm-project/vllm-ascend/issues/19547"
     }
   ]
 }
